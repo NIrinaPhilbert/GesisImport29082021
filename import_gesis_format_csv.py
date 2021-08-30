@@ -165,8 +165,8 @@ def submit(de, co, ds, ou, pe, value):
         if de != "null":
             payload = {}
             #url = "https://gesis.snis-sante.net/api/dataValues"
-            url = "https://http://localhost:8080/api/dataValues"
-            url_for_custom_form = "https://http://localhost:8080/api/dataValues?de=" + de + "&co=" + co + "&ds=" + ds + "&ou=" + ou + "&pe=" + pe + "&value=" + value
+            url = "http://localhost:8080/api/dataValues"
+            url_for_custom_form = "http://localhost:8080/api/dataValues?de=" + de + "&co=" + co + "&ds=" + ds + "&ou=" + ou + "&pe=" + pe + "&value=" + value
             # post = requests.post(url_custom_form, auth = (os.environ['v_param'] , os.environ['w_param']) , data = payload)
             post = requests.post(url_for_custom_form, auth=("Nirina", "Nirina@2017old"), data=payload)
             if post.status_code not in [200, 201]:
@@ -178,7 +178,7 @@ def submit(de, co, ds, ou, pe, value):
 
         else:
             #url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
-            url = "https://127.0.0.1:8080/api/completeDataSetRegistrations"
+            url = "http://127.0.0.1:8080/api/completeDataSetRegistrations"
             if value == "complete":
                 completed = "true"
             else:
@@ -214,7 +214,7 @@ def submit(de, co, ds, ou, pe, value):
 def terminerdataset(ds, pe, ou):
     value = ""
     #url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
-    url = "https://127.0.0.1:8080/api/completeDataSetRegistrations"
+    url = "http://127.0.0.1:8080/api/completeDataSetRegistrations"
     if value == "complete":
         completed = "true"
     else:

@@ -206,7 +206,7 @@ def submit(de, co, ds, ou, pe, value):
                         }
                     ]
             }
-            post = requests.post(url, json=my_json_data, auth=(os.environ["userdhis2"], os.environ["pwddhis2"]), data=payload)
+            post = requests.post(url, json=my_json_data, auth=(os.environ["userdhis2"], os.environ["pwddhis2"]))
 
             try:
                 print("post result :" + post.json())

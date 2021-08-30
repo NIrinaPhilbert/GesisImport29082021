@@ -180,7 +180,7 @@ def submit(de, co, ds, ou, pe, value):
             url = "https://gesis.snis-sante.net/api/dataValues"
             # url = "http://localhost:8080/api/dataValues"
             url_for_custom_form = "http://localhost:8080/api/dataValues?de=" + de + "&co=" + co + "&ds=" + ds + "&ou=" + ou + "&pe=" + pe + "&value=" + value
-            post = requests.post(url_for_custom_form, os.environ["userdhis2"], os.environ["pwddhis2"], data=payload)
+            post = requests.post(url_for_custom_form, auth=(os.environ["userdhis2"], os.environ["pwddhis2"]), data=payload)
 
             if post.status_code not in [200, 201]:
                 print("status code:" + str(post.status_code) + "text sup " + post.text)

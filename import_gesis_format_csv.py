@@ -170,7 +170,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
 
 
 def submit(de, co, ds, ou, pe, value):
-    payload = {}
+    #payload = {}
     print("n\n")
     try:
 
@@ -243,7 +243,7 @@ def terminerdataset(ds, pe, ou):
             ]
     }
     post = requests.post(url, json=my_json_data, auth=(os.environ["userdhis2"], os.environ["pwddhis2"]))
-    
+
 
     try:
         print("post result :" + post.json())

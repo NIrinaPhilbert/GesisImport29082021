@@ -7,7 +7,16 @@ import time
 import os
 from datetime import datetime
 
-uid_dataset = [{'tRM_CSB_Cons_Ext':'GSUZkSLVfZy'},{'tRM_CSB_CEXT_Utilisation_Prescription': 'GSUZkSLVfZy'}, {'tRM_CSB_Depistage_PEC': 'ToV2hqPjApV'},{'tRM_CSB_Depistage_PEC_ISTVIH': 'ToV2hqPjApV'}, {'tRM_CSB_SURVEILLANCE_NUT': 'fVhjtnQnFpu'},{'tRM_CSB_CONS_PRENAT': 'zVl3gPlL9HO'}, {'tRM_CSB_Maternite': 'zVl3gPlL9HO'},{'tRM_CSB_PEV_Enfants': 'zVl3gPlL9HO'}, {'tRM_CSB_PF': 'zVl3gPlL9HO'},{'tRM_CSB_DENTISTERI': 'kuBlaKJhV7W'}, {'tRM_CSB_Scolaire': 'QDJ43MNqsGP'},{'tRM_CSB_GES_STO_INTRANTS': 'NZ52X9Fw4lB'}, {'tRM_CSB_INTRANT_IST_VIH_NUT_PF': 'NZ52X9Fw4lB'},{'tRM_CSB_INTRANT_Tub_Lepre_MSR': 'NZ52X9Fw4lB'}, {'tRM_CSB_FANOME': 'NZ52X9Fw4lB'},{'tRM_CSB_FANOME': 'fYvqcl44zlF'}, {'tRM_CSB_GESTFIN': 'fYvqcl44zlF'}]
+uid_dataset = [{'tRM_CSB_Cons_Ext': 'GSUZkSLVfZy'}, {'tRM_CSB_CEXT_Utilisation_Prescription': 'GSUZkSLVfZy'},
+               {'tRM_CSB_Depistage_PEC': 'ToV2hqPjApV'}, {'tRM_CSB_Depistage_PEC_ISTVIH': 'ToV2hqPjApV'},
+               {'tRM_CSB_SURVEILLANCE_NUT': 'fVhjtnQnFpu'}, {'tRM_CSB_CONS_PRENAT': 'zVl3gPlL9HO'},
+               {'tRM_CSB_Maternite': 'zVl3gPlL9HO'}, {'tRM_CSB_PEV_Enfants': 'zVl3gPlL9HO'},
+               {'tRM_CSB_PF': 'zVl3gPlL9HO'}, {'tRM_CSB_DENTISTERI': 'kuBlaKJhV7W'},
+               {'tRM_CSB_Scolaire': 'QDJ43MNqsGP'}, {'tRM_CSB_GES_STO_INTRANTS': 'NZ52X9Fw4lB'},
+               {'tRM_CSB_INTRANT_IST_VIH_NUT_PF': 'NZ52X9Fw4lB'}, {'tRM_CSB_INTRANT_Tub_Lepre_MSR': 'NZ52X9Fw4lB'},
+               {'tRM_CSB_FANOME': 'NZ52X9Fw4lB'}, {'tRM_CSB_FANOME': 'fYvqcl44zlF'}, {'tRM_CSB_GESTFIN': 'fYvqcl44zlF'}]
+
+
 def browse_json_array(label, mylist):
     result = ''
     for value in mylist:
@@ -16,6 +25,7 @@ def browse_json_array(label, mylist):
         except:
             pass
     return result
+
 
 def get_uid_ou_dhis2(vcodegesis):
     uiddhis2 = ""
@@ -107,53 +117,54 @@ def get_periode_format_annee_mois(vAnnee, vMois):
     zAnneeMois = zAnnee + zMois
     return zAnneeMois
 
-def importer_gesis_vers_dhis2(tablename,filedbname,ListNomColonneInutile):
+
+def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     global dfexcel
-    #dfexcel = pdexcel.read_excel(filedbname)
+    # dfexcel = pdexcel.read_excel(filedbname)
     dfexcel = pdexcel.read_csv(filedbname)
     dataSetID = browse_json_array(tablename, uid_dataset)
-    for index,row in dfexcel.iterrows():
-        codegesisfs = int(dfexcel.loc[index,'cCodeStru'])
+    for index, row in dfexcel.iterrows():
+        codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
         ou_uid = get_uid_ou_dhis2(codegesisfs)
-        if(tablename == 'tRM_CSB_Cons_Ext'):
+        if (tablename == 'tRM_CSB_Cons_Ext'):
             vcode = dfexcel.loc[index, "cCode"]
         else:
             vcode = ""
-        if check_if_row_dataframe_has_value(dfexcel,index,ListNomColonneInutile,codegesisfs,ou_uid) == True:
+        if check_if_row_dataframe_has_value(dfexcel, index, ListNomColonneInutile, codegesisfs, ou_uid) == True:
             print("\n\n")
             print("debut Iteration ligne")
-            zPeriode = get_periode_format_annee_mois(dfexcel.loc[index,'cAnnee'],dfexcel.loc[index,'cPeriode'])
-            print("periode="+zPeriode)
+            zPeriode = get_periode_format_annee_mois(dfexcel.loc[index, 'cAnnee'], dfexcel.loc[index, 'cPeriode'])
+            print("periode=" + zPeriode)
             for col_name in dfexcel.columns:
 
-                #print("nomcolonne=",col_name,"valeur colonne=",value_colonne)
-                #if dfexcel.loc[index, col_name] != "nan" and col_name not in ListNomColonneInutile:
-                if pdexcel.isnull(dfexcel.at[index,col_name]) == False and col_name not in ListNomColonneInutile:
-                    print("code gesis fs=",codegesisfs)
-                    print("ou ="+ou_uid)
-                    print("periode=",zPeriode)
-                    print("ds ="+dataSetID)
+                # print("nomcolonne=",col_name,"valeur colonne=",value_colonne)
+                # if dfexcel.loc[index, col_name] != "nan" and col_name not in ListNomColonneInutile:
+                if pdexcel.isnull(dfexcel.at[index, col_name]) == False and col_name not in ListNomColonneInutile:
+                    print("code gesis fs=", codegesisfs)
+                    print("ou =" + ou_uid)
+                    print("periode=", zPeriode)
+                    print("ds =" + dataSetID)
                     value_colonne = int(dfexcel.loc[index, col_name])
-                    print("nomcolonne=",col_name,"valeur colonne=",value_colonne)
-                    de_uid = get_de_uid(tablename,col_name,vcode)
-                    coc_uid = get_co_uid(tablename,col_name,vcode)
-                    print("de_uid=",de_uid)
-                    print("co_uid=",coc_uid)
+                    print("nomcolonne=", col_name, "valeur colonne=", value_colonne)
+                    de_uid = get_de_uid(tablename, col_name, vcode)
+                    coc_uid = get_co_uid(tablename, col_name, vcode)
+                    print("de_uid=", de_uid)
+                    print("co_uid=", coc_uid)
                     print("fin colonne")
                     print("\n")
-                    if(de_uid != "" and len(de_uid) ==11 and coc_uid != "" and len(coc_uid) ==11):
-                        submit(de_uid,coc_uid,dataSetID,ou_uid,zPeriode,str(value_colonne))
-                        #time.sleep(1)
+                    if (de_uid != "" and len(de_uid) == 11 and coc_uid != "" and len(coc_uid) == 11):
+                        submit(de_uid, coc_uid, dataSetID, ou_uid, zPeriode, str(value_colonne))
+                        # time.sleep(1)
 
                 else:
                     continue
             print("fin iteration colonne")
-            terminerdataset(dataSetID,zPeriode,ou_uid)
+            terminerdataset(dataSetID, zPeriode, ou_uid)
             time.sleep(1)
 
         else:
             continue
-        print("fin insertion ligne N°",index,"du code gesis",codegesisfs,"periode",zPeriode)
+        print("fin insertion ligne N°", index, "du code gesis", codegesisfs, "periode", zPeriode)
 
     print("============test====================")
 
@@ -166,9 +177,9 @@ def submit(de, co, ds, ou, pe, value):
         if de != "null":
             payload = {}
             url = "https://gesis.snis-sante.net/api/dataValues"
-            #url = "http://localhost:8080/api/dataValues"
+            # url = "http://localhost:8080/api/dataValues"
             url_for_custom_form = "http://localhost:8080/api/dataValues?de=" + de + "&co=" + co + "&ds=" + ds + "&ou=" + ou + "&pe=" + pe + "&value=" + value
-            post = requests.post(url_for_custom_form, os.environ['v_param'] , os.environ['w_param'], data=payload)
+            post = requests.post(url_for_custom_form, os.environ['v_param'],os.environ['w_param'],data=payload)
 
             if post.status_code not in [200, 201]:
                 print("status code:" + str(post.status_code) + "text sup " + post.text)
@@ -179,7 +190,7 @@ def submit(de, co, ds, ou, pe, value):
 
         else:
             url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
-            #url = "http://127.0.0.1:8080/api/completeDataSetRegistrations"
+            # url = "http://127.0.0.1:8080/api/completeDataSetRegistrations"
             if value == "complete":
                 completed = "true"
             else:
@@ -195,8 +206,7 @@ def submit(de, co, ds, ou, pe, value):
                         }
                     ]
             }
-            post = requests.post(url,json=my_json_data,auth = (os.environ['v_param'] , os.environ['w_param']), data=payload)
-
+            post = requests.post(url, json=my_json_data, auth=(os.environ['v_param'], os.environ['w_param']), data=payload)
 
             try:
                 print("post result :" + post.json())
@@ -215,7 +225,7 @@ def submit(de, co, ds, ou, pe, value):
 def terminerdataset(ds, pe, ou):
     value = ""
     url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
-    #url = "http://127.0.0.1:8080/api/completeDataSetRegistrations"
+    # url = "http://127.0.0.1:8080/api/completeDataSetRegistrations"
     if value == "complete":
         completed = "true"
     else:
@@ -232,8 +242,8 @@ def terminerdataset(ds, pe, ou):
                 }
             ]
     }
-    post = requests.post(url,json=my_json_data,auth = (os.environ['v_param'] , os.environ['w_param']))
-    #post = requests.post(url, json=my_json_data, auth=("Nirina", "Nirina@2017old"))
+    post = requests.post(url, json=my_json_data, auth=(os.environ['v_param'], os.environ['w_param']))
+    # post = requests.post(url, json=my_json_data, auth=("Nirina", "Nirina@2017old"))
 
     try:
         print("post result :" + post.json())
@@ -246,12 +256,11 @@ def terminerdataset(ds, pe, ou):
         print("data was completed")
 
 
-
 # Press the green button in the gutter to run the script.
 # ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
 ListNomColonneInutileTab18 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
 filedbname = 'Test30082021.csv'
-#filedbname = 'Tab3CSV.csv'
+# filedbname = 'Tab3CSV.csv'
 Tablename = 'tRM_CSB_Cons_Ext'
 importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab3)

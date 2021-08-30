@@ -149,7 +149,7 @@ def importer_gesis_vers_dhis2(tablename,filedbname,ListNomColonneInutile):
                     continue
             print("fin iteration colonne")
             terminerdataset(dataSetID,zPeriode,ou_uid)
-            #time.sleep(1)
+            time.sleep(1)
 
         else:
             continue
@@ -164,11 +164,11 @@ def submit(de, co, ds, ou, pe, value):
 
         if de != "null":
             payload = {}
-            #url = "https://gesis.snis-sante.net/api/dataValues"
-            url = "http://localhost:8080/api/dataValues"
+            url = "https://gesis.snis-sante.net/api/dataValues"
+            #url = "http://localhost:8080/api/dataValues"
             url_for_custom_form = "http://localhost:8080/api/dataValues?de=" + de + "&co=" + co + "&ds=" + ds + "&ou=" + ou + "&pe=" + pe + "&value=" + value
-            # post = requests.post(url_custom_form, auth = (os.environ['v_param'] , os.environ['w_param']) , data = payload)
-            post = requests.post(url_for_custom_form, auth=("Nirina", "Nirina@2017old"), data=payload)
+            post = requests.post(url_for_custom_form, os.environ['v_param'] , os.environ['w_param'], data=payload)
+
             if post.status_code not in [200, 201]:
                 print("status code:" + str(post.status_code) + "text sup " + post.text)
                 raise ValueError("Data could not be submitted")
@@ -177,8 +177,8 @@ def submit(de, co, ds, ou, pe, value):
 
 
         else:
-            #url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
-            url = "http://127.0.0.1:8080/api/completeDataSetRegistrations"
+            url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
+            #url = "http://127.0.0.1:8080/api/completeDataSetRegistrations"
             if value == "complete":
                 completed = "true"
             else:
@@ -194,8 +194,8 @@ def submit(de, co, ds, ou, pe, value):
                         }
                     ]
             }
-            # post = requests.post(url,json=my_json_data,auth = (os.environ['v_param'] , os.environ['w_param']))
-            post = requests.post(url, json=my_json_data, auth=("Nirina", "Nirina@2017old"))
+            post = requests.post(url,json=my_json_data,auth = (os.environ['v_param'] , os.environ['w_param']), data=payload)
+
 
             try:
                 print("post result :" + post.json())
@@ -213,8 +213,8 @@ def submit(de, co, ds, ou, pe, value):
 
 def terminerdataset(ds, pe, ou):
     value = ""
-    #url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
-    url = "http://127.0.0.1:8080/api/completeDataSetRegistrations"
+    url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
+    #url = "http://127.0.0.1:8080/api/completeDataSetRegistrations"
     if value == "complete":
         completed = "true"
     else:
@@ -231,8 +231,8 @@ def terminerdataset(ds, pe, ou):
                 }
             ]
     }
-    # post = requests.post(url,json=my_json_data,auth = (os.environ['v_param'] , os.environ['w_param']))
-    post = requests.post(url, json=my_json_data, auth=("Nirina", "Nirina@2017old"))
+    post = requests.post(url,json=my_json_data,auth = (os.environ['v_param'] , os.environ['w_param']))
+    #post = requests.post(url, json=my_json_data, auth=("Nirina", "Nirina@2017old"))
 
     try:
         print("post result :" + post.json())

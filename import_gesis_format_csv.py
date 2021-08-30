@@ -159,6 +159,7 @@ def importer_gesis_vers_dhis2(tablename,filedbname,ListNomColonneInutile):
 
 
 def submit(de, co, ds, ou, pe, value):
+    payload = {}
     print("n\n")
     try:
 

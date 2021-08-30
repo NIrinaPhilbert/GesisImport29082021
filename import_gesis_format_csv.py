@@ -4,6 +4,7 @@ import pandas as pdexcel
 import requests
 import csv
 import time
+import os
 from datetime import datetime
 
 uid_dataset = [{'tRM_CSB_Cons_Ext':'GSUZkSLVfZy'},{'tRM_CSB_CEXT_Utilisation_Prescription': 'GSUZkSLVfZy'}, {'tRM_CSB_Depistage_PEC': 'ToV2hqPjApV'},{'tRM_CSB_Depistage_PEC_ISTVIH': 'ToV2hqPjApV'}, {'tRM_CSB_SURVEILLANCE_NUT': 'fVhjtnQnFpu'},{'tRM_CSB_CONS_PRENAT': 'zVl3gPlL9HO'}, {'tRM_CSB_Maternite': 'zVl3gPlL9HO'},{'tRM_CSB_PEV_Enfants': 'zVl3gPlL9HO'}, {'tRM_CSB_PF': 'zVl3gPlL9HO'},{'tRM_CSB_DENTISTERI': 'kuBlaKJhV7W'}, {'tRM_CSB_Scolaire': 'QDJ43MNqsGP'},{'tRM_CSB_GES_STO_INTRANTS': 'NZ52X9Fw4lB'}, {'tRM_CSB_INTRANT_IST_VIH_NUT_PF': 'NZ52X9Fw4lB'},{'tRM_CSB_INTRANT_Tub_Lepre_MSR': 'NZ52X9Fw4lB'}, {'tRM_CSB_FANOME': 'NZ52X9Fw4lB'},{'tRM_CSB_FANOME': 'fYvqcl44zlF'}, {'tRM_CSB_GESTFIN': 'fYvqcl44zlF'}]
@@ -142,17 +143,17 @@ def importer_gesis_vers_dhis2(tablename,filedbname,ListNomColonneInutile):
                     print("\n")
                     if(de_uid != "" and len(de_uid) ==11 and coc_uid != "" and len(coc_uid) ==11):
                         submit(de_uid,coc_uid,dataSetID,ou_uid,zPeriode,str(value_colonne))
-                        time.sleep(1)
+                        #time.sleep(1)
 
                 else:
                     continue
             print("fin iteration colonne")
             terminerdataset(dataSetID,zPeriode,ou_uid)
-            time.sleep(1)
+            #time.sleep(1)
 
         else:
             continue
-        print("fin iteration ligne")
+        print("fin insertion ligne N°",index,"du code gesis",codegesisfs,"periode",zPeriode)
 
     print("============test====================")
 
@@ -163,8 +164,9 @@ def submit(de, co, ds, ou, pe, value):
 
         if de != "null":
             payload = {}
-            url = "https://gesis.snis-sante.net/api/dataValues"
-            url_for_custom_form = "https://gesis.snis-sante.net/api/dataValues?de=" + de + "&co=" + co + "&ds=" + ds + "&ou=" + ou + "&pe=" + pe + "&value=" + value
+            #url = "https://gesis.snis-sante.net/api/dataValues"
+            url = "https://http://localhost:8080/api/dataValues"
+            url_for_custom_form = "https://http://localhost:8080/api/dataValues?de=" + de + "&co=" + co + "&ds=" + ds + "&ou=" + ou + "&pe=" + pe + "&value=" + value
             # post = requests.post(url_custom_form, auth = (os.environ['v_param'] , os.environ['w_param']) , data = payload)
             post = requests.post(url_for_custom_form, auth=("Nirina", "Nirina@2017old"), data=payload)
             if post.status_code not in [200, 201]:
@@ -175,7 +177,8 @@ def submit(de, co, ds, ou, pe, value):
 
 
         else:
-            url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
+            #url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
+            url = "https://127.0.0.1:8080/api/completeDataSetRegistrations"
             if value == "complete":
                 completed = "true"
             else:
@@ -210,7 +213,8 @@ def submit(de, co, ds, ou, pe, value):
 
 def terminerdataset(ds, pe, ou):
     value = ""
-    url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
+    #url = "https://gesis.snis-sante.net/api/completeDataSetRegistrations"
+    url = "https://127.0.0.1:8080/api/completeDataSetRegistrations"
     if value == "complete":
         completed = "true"
     else:
@@ -245,6 +249,7 @@ def terminerdataset(ds, pe, ou):
 # Press the green button in the gutter to run the script.
 # ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
 ListNomColonneInutileTab18 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
-filedbname = 'TestTab3.csv'
+ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
+filedbname = 'Test30082021.csv'
 Tablename = 'tRM_CSB_Cons_Ext'
-importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab18)
+importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab3)

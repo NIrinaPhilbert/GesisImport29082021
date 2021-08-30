@@ -263,4 +263,6 @@ ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cTy
 filedbname = 'Test30082021.csv'
 # filedbname = 'Tab3CSV.csv'
 Tablename = 'tRM_CSB_Cons_Ext'
+print(os.environ['v_param'])
+print(os.environ['w_param'])
 importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab3)

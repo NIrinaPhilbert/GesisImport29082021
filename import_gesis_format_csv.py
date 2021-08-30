@@ -265,6 +265,6 @@ filedbname = 'Test30082021.csv'
 Tablename = 'tRM_CSB_Cons_Ext'
 print(os.environ["v_param"])
 print("============================")
-print(os.environ.get('v_param'))
-print(os.environ.get('w_param'))
+#print(os.environ.get('v_param'))
+#print(os.environ.get('w_param'))
 importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab3)

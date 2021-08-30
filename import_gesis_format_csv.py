@@ -179,7 +179,7 @@ def submit(de, co, ds, ou, pe, value):
             url = "https://gesis.snis-sante.net/api/dataValues"
             # url = "http://localhost:8080/api/dataValues"
             url_for_custom_form = "http://localhost:8080/api/dataValues?de=" + de + "&co=" + co + "&ds=" + ds + "&ou=" + ou + "&pe=" + pe + "&value=" + value
-            post = requests.post(url_for_custom_form, os.environ['v_param'],os.environ['w_param'],data=payload)
+            post = requests.post(url_for_custom_form, os.environ["userdhis2"], os.environ["pwddhis2"], data=payload)
 
             if post.status_code not in [200, 201]:
                 print("status code:" + str(post.status_code) + "text sup " + post.text)
@@ -206,7 +206,7 @@ def submit(de, co, ds, ou, pe, value):
                         }
                     ]
             }
-            post = requests.post(url, json=my_json_data, auth=(os.environ['v_param'], os.environ['w_param']), data=payload)
+            post = requests.post(url, json=my_json_data, auth=(os.environ["userdhis2"], os.environ["pwddhis2"]), data=payload)
 
             try:
                 print("post result :" + post.json())
@@ -242,8 +242,8 @@ def terminerdataset(ds, pe, ou):
                 }
             ]
     }
-    post = requests.post(url, json=my_json_data, auth=(os.environ['v_param'], os.environ['w_param']))
-    # post = requests.post(url, json=my_json_data, auth=("Nirina", "Nirina@2017old"))
+    post = requests.post(url, json=my_json_data, auth=(os.environ["userdhis2"], os.environ["pwddhis2"]))
+    
 
     try:
         print("post result :" + post.json())
@@ -263,8 +263,5 @@ ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cTy
 filedbname = 'Test30082021.csv'
 # filedbname = 'Tab3CSV.csv'
 Tablename = 'tRM_CSB_Cons_Ext'
-print(os.environ["v_param"])
-print("============================")
-#print(os.environ.get('v_param'))
 #print(os.environ.get('w_param'))
 importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab3)

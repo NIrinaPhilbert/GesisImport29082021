@@ -261,7 +261,7 @@ def terminerdataset(ds, pe, ou):
 # ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
 ListNomColonneInutileTab18 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
-filedbname = 'Test30082021.csv'
+filedbname = 'Tab3TestErreur1.csv'
 # filedbname = 'Tab3CSV.csv'
 Tablename = 'tRM_CSB_Cons_Ext'
 #print(os.environ.get('w_param'))

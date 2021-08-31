@@ -124,7 +124,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     dfexcel = pdexcel.read_csv(filedbname)
     dataSetID = browse_json_array(tablename, uid_dataset)
     for index, row in dfexcel.iterrows():
-        if(index > 13615):
+        if(index > 24703):
             codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
             ou_uid = get_uid_ou_dhis2(codegesisfs)
             if (tablename == 'tRM_CSB_Cons_Ext'):
@@ -155,18 +155,27 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
                         print("\n")
                         if (de_uid != "" and len(de_uid) == 11 and coc_uid != "" and len(coc_uid) == 11):
                             submit(de_uid, coc_uid, dataSetID, ou_uid, zPeriode, str(value_colonne))
-                            time.sleep(0.5)
+                            time.sleep(0.2)
 
                     else:
                         continue
                 print("fin iteration colonne")
                 terminerdataset(dataSetID, zPeriode, ou_uid)
                 #time.sleep(1)
-                time.sleep(0.5)
+                time.sleep(0.2)
 
             else:
                 continue
             print("fin insertion ligne N°", index, "du code gesis", codegesisfs, "periode", zPeriode)
+            print("================================================================================")
+            print("================================================================================")
+            print("fin insertion ligne N°", index, "du code gesis", codegesisfs, "periode", zPeriode)
+            print("================================================================================")
+            print("================================================================================")
+            print("fin insertion ligne N°", index, "du code gesis", codegesisfs, "periode", zPeriode)
+            print("================================================================================")
+            print("================================================================================")
+            print("================================================================================")
         else:
             continue
 

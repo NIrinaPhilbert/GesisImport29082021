@@ -125,7 +125,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     dataSetID = browse_json_array(tablename, uid_dataset)
     iNombreLigne = 0
     for index, row in dfexcel.iterrows():
-        if(index > 285334):
+        if(index > 285602):
             if iNombreLigne != 10:
                 codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
                 ou_uid = get_uid_ou_dhis2(codegesisfs)
@@ -171,6 +171,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
             else:
                 time.sleep(30)
                 iNombreLigne=0
+                print("Pause 30 seconde iNombreLigne="+iNombreLigne)
             print("fin insertion ligne N°", index, "du code gesis", codegesisfs, "periode", zPeriode)
             print("================================================================================")
             print("================================================================================")
@@ -181,7 +182,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
             print("================================================================================")
             print("================================================================================")
             print("================================================================================")
-            
+
 
         else:
             continue

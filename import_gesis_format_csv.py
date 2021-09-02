@@ -123,7 +123,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     # dfexcel = pdexcel.read_excel(filedbname)
     dfexcel = pdexcel.read_csv(filedbname)
     dataSetID = browse_json_array(tablename, uid_dataset)
-	iNombreLigne = 0
+    iNombreLigne = 0
     for index, row in dfexcel.iterrows():
         if(index > 282455):
             iNombreLigne +=1

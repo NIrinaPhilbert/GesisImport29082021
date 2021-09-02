@@ -125,7 +125,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     dataSetID = browse_json_array(tablename, uid_dataset)
     iNombreLigne = 0
     for index, row in dfexcel.iterrows():
-        if(index > 34605):
+        if(index > 342131):
             if iNombreLigne != 1000:
                 codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
                 ou_uid = get_uid_ou_dhis2(codegesisfs)

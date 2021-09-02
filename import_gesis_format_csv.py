@@ -126,53 +126,51 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     iNombreLigne = 0
     for index, row in dfexcel.iterrows():
         if(index > 284385):
-            iNombreLigne +=1
-            codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
-            ou_uid = get_uid_ou_dhis2(codegesisfs)
-            if (tablename == 'tRM_CSB_Cons_Ext'):
-                vcode = dfexcel.loc[index, "cCode"]
-            else:
-                vcode = ""
-            if check_if_row_dataframe_has_value(dfexcel, index, ListNomColonneInutile, codegesisfs, ou_uid) == True:
-                print("\n\n")
-                print("debut Iteration ligne")
-                zPeriode = get_periode_format_annee_mois(dfexcel.loc[index, 'cAnnee'], dfexcel.loc[index, 'cPeriode'])
-                print("periode=" + zPeriode)
-                for col_name in dfexcel.columns:
+            if iNombreLigne != 10:
+                codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
+                ou_uid = get_uid_ou_dhis2(codegesisfs)
+                if (tablename == 'tRM_CSB_Cons_Ext'):
+                    vcode = dfexcel.loc[index, "cCode"]
+                else:
+                    vcode = ""
+                if check_if_row_dataframe_has_value(dfexcel, index, ListNomColonneInutile, codegesisfs, ou_uid) == True:
+                    print("\n\n")
+                    print("debut Iteration ligne")
+                    zPeriode = get_periode_format_annee_mois(dfexcel.loc[index, 'cAnnee'], dfexcel.loc[index, 'cPeriode'])
+                    print("periode=" + zPeriode)
+                    for col_name in dfexcel.columns:
 
-                    # print("nomcolonne=",col_name,"valeur colonne=",value_colonne)
-                    # if dfexcel.loc[index, col_name] != "nan" and col_name not in ListNomColonneInutile:
-                    if pdexcel.isnull(dfexcel.at[index, col_name]) == False and col_name not in ListNomColonneInutile:
-                        print("code gesis fs=", codegesisfs)
-                        print("ou =" + ou_uid)
-                        print("periode=", zPeriode)
-                        print("ds =" + dataSetID)
-                        value_colonne = int(dfexcel.loc[index, col_name])
-                        print("nomcolonne=", col_name, "valeur colonne=", value_colonne)
-                        de_uid = get_de_uid(tablename, col_name, vcode)
-                        coc_uid = get_co_uid(tablename, col_name, vcode)
-                        print("de_uid=", de_uid)
-                        print("co_uid=", coc_uid)
-                        print("fin colonne")
-                        print("\n")
-                        if (de_uid != "" and len(de_uid) == 11 and coc_uid != "" and len(coc_uid) == 11):
-                            submit(de_uid, coc_uid, dataSetID, ou_uid, zPeriode, str(value_colonne))
-                            time.sleep(0.02)
+                        # print("nomcolonne=",col_name,"valeur colonne=",value_colonne)
+                        # if dfexcel.loc[index, col_name] != "nan" and col_name not in ListNomColonneInutile:
+                        if pdexcel.isnull(dfexcel.at[index, col_name]) == False and col_name not in ListNomColonneInutile:
+                            print("code gesis fs=", codegesisfs)
+                            print("ou =" + ou_uid)
+                            print("periode=", zPeriode)
+                            print("ds =" + dataSetID)
+                            value_colonne = int(dfexcel.loc[index, col_name])
+                            print("nomcolonne=", col_name, "valeur colonne=", value_colonne)
+                            de_uid = get_de_uid(tablename, col_name, vcode)
+                            coc_uid = get_co_uid(tablename, col_name, vcode)
+                            print("de_uid=", de_uid)
+                            print("co_uid=", coc_uid)
+                            print("fin colonne")
+                            print("\n")
+                            if (de_uid != "" and len(de_uid) == 11 and coc_uid != "" and len(coc_uid) == 11):
+                                submit(de_uid, coc_uid, dataSetID, ou_uid, zPeriode, str(value_colonne))
+                                time.sleep(0.02)
 
-                    else:
-                        continue
-                print("fin iteration colonne")
-                terminerdataset(dataSetID, zPeriode, ou_uid)
-                #time.sleep(1)
-                time.sleep(0.02)
-                if (iNombreLigne == 10):
-                    time.sleep(30)
-                    iNombreLigne = 0
+                        else:
+                            continue
+                    print("fin iteration colonne")
+                    terminerdataset(dataSetID, zPeriode, ou_uid)
+                    iNombreLigne+=1
+                    #time.sleep(1)
+                    time.sleep(0.02)
                 else:
                     continue
-
             else:
-                continue
+                time.sleep(30)
+                iNombreLigne=0
             print("fin insertion ligne N°", index, "du code gesis", codegesisfs, "periode", zPeriode)
             print("================================================================================")
             print("================================================================================")
@@ -183,6 +181,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
             print("================================================================================")
             print("================================================================================")
             print("================================================================================")
+            iNombreLigne +=1
 
         else:
             continue

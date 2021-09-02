@@ -164,6 +164,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
                     print("fin iteration colonne")
                     terminerdataset(dataSetID, zPeriode, ou_uid)
                     iNombreLigne+=1
+                    print("iNombre ligne ="+iNombreLigne)
                     #time.sleep(1)
                     time.sleep(0.02)
                 else:

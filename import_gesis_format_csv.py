@@ -126,7 +126,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
 	iNombreLigne = 0
     for index, row in dfexcel.iterrows():
         if(index > 282455):
-			iNombreLigne = iNombreLigne+1
+            iNombreLigne +=1
             codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
             ou_uid = get_uid_ou_dhis2(codegesisfs)
             if (tablename == 'tRM_CSB_Cons_Ext'):

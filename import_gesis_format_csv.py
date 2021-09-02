@@ -179,8 +179,8 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
             print("================================================================================")
             print("================================================================================")
 			if (iNombreLigne == 10):
-                time.sleep(30)
-                iNombreLigne = 0
+				time.sleep(30)
+				iNombreLigne = 0
             else:
                 continue
         else:

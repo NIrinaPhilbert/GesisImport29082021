@@ -123,8 +123,10 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     # dfexcel = pdexcel.read_excel(filedbname)
     dfexcel = pdexcel.read_csv(filedbname)
     dataSetID = browse_json_array(tablename, uid_dataset)
+	iNombreLigne = 0
     for index, row in dfexcel.iterrows():
         if(index > 282455):
+			iNombreLigne = iNombreLigne+1
             codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
             ou_uid = get_uid_ou_dhis2(codegesisfs)
             if (tablename == 'tRM_CSB_Cons_Ext'):
@@ -176,6 +178,9 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
             print("================================================================================")
             print("================================================================================")
             print("================================================================================")
+			if iNombreLigne == 10:
+				time.sleep(30)
+				iNombreLigne = 0
         else:
             continue
 

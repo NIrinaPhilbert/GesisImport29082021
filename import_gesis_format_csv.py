@@ -46,6 +46,7 @@ def get_uid_ou_dhis2(vcodegesis):
 def get_de_uid(tablename, vcolonnegesis, vcode):
     de_coc_uid = ""
     de_uid = ""
+
     if (tablename == 'tRM_CSB_Cons_Ext') or (tablename == 'tRM_CSB_Violences_traumatismes'):
         csv_file = open('metadatagesis/de_ce_traumatismeetviolencecsv.csv', 'r')
 
@@ -93,23 +94,18 @@ def get_co_uid(tablename, vcolonnegesis, vcode):
     return coc_uid
 
 
-def check_if_row_dataframe_has_value(df, index, colonneinutile, codegesisfs, uidoudhis2, tablename, vcode):
-    res = True
-    if tablename == 'tRM_CSB_Cons_Ext' and vcode == '':
-        res = False
-    else:
-        if tablename == 'tRM_CSB_Violences_traumatismes' and vcode == '':
-            res = False
+def check_if_row_dataframe_has_value(df, index, colonneinutile, codegesisfs, uidoudhis2):
+    res = False
+    if (uidoudhis2 != ""):
+        i = 0
+        for col_name in df.columns:
+            if pdexcel.isnull(dfexcel.at[index, col_name]) == False and col_name not in colonneinutile:
+                i += 1
+        if i > 0:
+            res = True
         else:
-            if (uidoudhis2 != ""):
-                i = 0
-                for col_name in df.columns:
-                    if pdexcel.isnull(dfexcel.at[index, col_name]) == False and col_name not in colonneinutile:
-                        i += 1
-                if i == 0:
-                    res = False
-                else:
-                    print("Existance uid dhis2 introuvable pour le code gesis", codegesisfs)
+            print("Existance uid dhis2 introuvable pour le code gesis", codegesisfs)
+
     return res
 
 
@@ -131,7 +127,8 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     iNombreLigne = 0
     for index, row in dfexcel.iterrows():
 		#apres 520079e ligne
-        if(index > 639357):
+		#if(639357+24 == 639381):
+        if(index > 639381):
             if iNombreLigne != 5000:
                 codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
                 ou_uid = get_uid_ou_dhis2(codegesisfs)
@@ -139,7 +136,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
                     vcode = dfexcel.loc[index, "cCode"]
                 else:
                     vcode = ""
-                if check_if_row_dataframe_has_value(dfexcel, index, ListNomColonneInutile, codegesisfs, ou_uid, tablename, vcode) == True:
+                if check_if_row_dataframe_has_value(dfexcel, index, ListNomColonneInutile, codegesisfs, ou_uid) == True:
                     print("\n\n")
                     print("debut Iteration ligne")
                     zPeriode = get_periode_format_annee_mois(dfexcel.loc[index, 'cAnnee'], dfexcel.loc[index, 'cPeriode'])

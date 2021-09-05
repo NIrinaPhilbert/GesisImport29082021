@@ -93,7 +93,7 @@ def get_co_uid(tablename, vcolonnegesis, vcode):
     return coc_uid
 
 
-def check_if_row_dataframe_has_value(df, index, colonneinutile, codegesisfs, uidoudhis2):
+def check_if_row_dataframe_has_value(df, index, colonneinutile, codegesisfs, uidoudhis2, tablename, vcode):
     res = False
     if (uidoudhis2 != ""):
         i = 0
@@ -105,6 +105,10 @@ def check_if_row_dataframe_has_value(df, index, colonneinutile, codegesisfs, uid
 
     else:
         print("Existance uid dhis2 introuvable pour le code gesis", codegesisfs)
+	if (tablename == 'tRM_CSB_Cons_Ext') or (tablename == 'tRM_CSB_Violences_traumatismes'):
+        if vcode == "":
+			res = False
+		
     return res
 
 
@@ -126,7 +130,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     iNombreLigne = 0
     for index, row in dfexcel.iterrows():
 		#apres 520079e ligne
-        if(index > 621277):
+        if(index > 639357):
             if iNombreLigne != 5000:
                 codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
                 ou_uid = get_uid_ou_dhis2(codegesisfs)
@@ -134,7 +138,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
                     vcode = dfexcel.loc[index, "cCode"]
                 else:
                     vcode = ""
-                if check_if_row_dataframe_has_value(dfexcel, index, ListNomColonneInutile, codegesisfs, ou_uid) == True:
+                if check_if_row_dataframe_has_value(dfexcel, index, ListNomColonneInutile, codegesisfs, ou_uid, tablename, vcode) == True:
                     print("\n\n")
                     print("debut Iteration ligne")
                     zPeriode = get_periode_format_annee_mois(dfexcel.loc[index, 'cAnnee'], dfexcel.loc[index, 'cPeriode'])

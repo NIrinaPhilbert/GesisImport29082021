@@ -95,24 +95,21 @@ def get_co_uid(tablename, vcolonnegesis, vcode):
 
 def check_if_row_dataframe_has_value(df, index, colonneinutile, codegesisfs, uidoudhis2, tablename, vcode):
     res = True
-	if tablename == 'tRM_CSB_Cons_Ext' and vcode == '':
-		res = False
-	else:
-		if tablename == 'tRM_CSB_Violences_traumatismes' and vcode == '':
-			res = False
-		else:
-			if (uidoudhis2 != ""):
-				i = 0
-				for col_name in df.columns:
-					if pdexcel.isnull(dfexcel.at[index, col_name]) == False and col_name not in colonneinutile:
-						i += 1
-				if i == 0:
-					res = False
-
-			else:
-				print("Existance uid dhis2 introuvable pour le code gesis", codegesisfs)
-			
-		
+    if tablename == 'tRM_CSB_Cons_Ext' and vcode == '':
+        res = False
+    else:
+        if tablename == 'tRM_CSB_Violences_traumatismes' and vcode == '':
+            res = False
+        else:
+            if (uidoudhis2 != ""):
+                i = 0
+                for col_name in df.columns:
+                    if pdexcel.isnull(dfexcel.at[index, col_name]) == False and col_name not in colonneinutile:
+                        i += 1
+                if i == 0:
+                    res = False
+                else:
+                    print("Existance uid dhis2 introuvable pour le code gesis", codegesisfs)
     return res
 
 

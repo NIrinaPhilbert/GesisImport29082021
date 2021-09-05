@@ -95,10 +95,10 @@ def get_co_uid(tablename, vcolonnegesis, vcode):
 
 def check_if_row_dataframe_has_value(df, index, colonneinutile, codegesisfs, uidoudhis2, tablename, vcode):
     res = True
-	if (tablename == 'tRM_CSB_Cons_Ext') and (vcode == ""):
+	if tablename == 'tRM_CSB_Cons_Ext' and vcode == '':
 		res = False
 	else:
-		if (tablename == 'tRM_CSB_Violences_traumatismes') and (vcode == ""):
+		if tablename == 'tRM_CSB_Violences_traumatismes' and vcode == '':
 			res = False
 		else:
 			if (uidoudhis2 != ""):

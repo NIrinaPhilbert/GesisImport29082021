@@ -105,8 +105,9 @@ def check_if_row_dataframe_has_value(df, index, colonneinutile, codegesisfs, uid
 
     else:
         print("Existance uid dhis2 introuvable pour le code gesis", codegesisfs)
+		
 	if (tablename == 'tRM_CSB_Cons_Ext') or (tablename == 'tRM_CSB_Violences_traumatismes'):
-        if vcode == "":
+		if vcode == "":
 			res = False
 		
     return res

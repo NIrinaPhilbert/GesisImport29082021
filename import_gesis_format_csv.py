@@ -126,9 +126,9 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     dataSetID = browse_json_array(tablename, uid_dataset)
     iNombreLigne = 0
     for index, row in dfexcel.iterrows():
-		#apres 520079e ligne
-		#if(639357+24 == 639381):
-        if(index > 952213):s
+        # apres 520079e ligne
+        # if(639357+24 == 639381):
+        if (index > 952213):
             if iNombreLigne != 5000:
                 codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
                 ou_uid = get_uid_ou_dhis2(codegesisfs)
@@ -139,13 +139,15 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
                 if check_if_row_dataframe_has_value(dfexcel, index, ListNomColonneInutile, codegesisfs, ou_uid) == True:
                     print("\n\n")
                     print("debut Iteration ligne")
-                    zPeriode = get_periode_format_annee_mois(dfexcel.loc[index, 'cAnnee'], dfexcel.loc[index, 'cPeriode'])
+                    zPeriode = get_periode_format_annee_mois(dfexcel.loc[index, 'cAnnee'],
+                                                             dfexcel.loc[index, 'cPeriode'])
                     print("periode=" + zPeriode)
                     for col_name in dfexcel.columns:
 
                         # print("nomcolonne=",col_name,"valeur colonne=",value_colonne)
                         # if dfexcel.loc[index, col_name] != "nan" and col_name not in ListNomColonneInutile:
-                        if pdexcel.isnull(dfexcel.at[index, col_name]) == False and col_name not in ListNomColonneInutile:
+                        if pdexcel.isnull(
+                                dfexcel.at[index, col_name]) == False and col_name not in ListNomColonneInutile:
                             print("code gesis fs=", codegesisfs)
                             print("ou =" + ou_uid)
                             print("periode=", zPeriode)
@@ -166,17 +168,17 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
                             continue
                     print("fin iteration colonne")
                     terminerdataset(dataSetID, zPeriode, ou_uid)
-                    iNombreLigne+=1
-                    print("iNombre ligne ="+str(iNombreLigne))
-                    #time.sleep(0.01)
+                    iNombreLigne += 1
+                    print("iNombre ligne =" + str(iNombreLigne))
+                    # time.sleep(0.01)
                     time.sleep(0.005)
-		
+
                 else:
                     continue
             else:
                 time.sleep(60)
-                iNombreLigne=0
-                print("Pause 30 seconde iNombreLigne="+str(iNombreLigne))
+                iNombreLigne = 0
+                print("Pause 30 seconde iNombreLigne=" + str(iNombreLigne))
             print("fin insertion ligne N°", index, "du code gesis", codegesisfs, "periode", zPeriode)
             print("================================================================================")
             print("================================================================================")
@@ -196,7 +198,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
 
 
 def submit(de, co, ds, ou, pe, value):
-    #payload = {}
+    # payload = {}
     print("n\n")
     try:
 
@@ -205,7 +207,8 @@ def submit(de, co, ds, ou, pe, value):
             url = "https://gesis.snis-sante.net/api/dataValues"
             # url = "http://localhost:8080/api/dataValues"
             url_for_custom_form = "http://localhost:8080/api/dataValues?de=" + de + "&co=" + co + "&ds=" + ds + "&ou=" + ou + "&pe=" + pe + "&value=" + value
-            post = requests.post(url_for_custom_form, auth=(os.environ["userdhis2"], os.environ["pwddhis2"]), data=payload)
+            post = requests.post(url_for_custom_form, auth=(os.environ["userdhis2"], os.environ["pwddhis2"]),
+                                 data=payload)
 
             if post.status_code not in [200, 201]:
                 print("status code:" + str(post.status_code) + "text sup " + post.text)
@@ -270,7 +273,6 @@ def terminerdataset(ds, pe, ou):
     }
     post = requests.post(url, json=my_json_data, auth=(os.environ["userdhis2"], os.environ["pwddhis2"]))
 
-
     try:
         print("post result :" + post.json())
     except:
@@ -286,8 +288,8 @@ def terminerdataset(ds, pe, ou):
 # ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
 ListNomColonneInutileTab18 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
-#filedbname = 'Tab3TestErreur1.csv'
+# filedbname = 'Tab3TestErreur1.csv'
 filedbname = 'Tab3CSV.csv'
 Tablename = 'tRM_CSB_Cons_Ext'
-#print(os.environ.get('w_param'))
+# print(os.environ.get('w_param'))
 importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab3)

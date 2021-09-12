@@ -140,7 +140,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
                     print("\n\n")
                     print("debut Iteration ligne")
                     zPeriode = get_periode_format_annee_mois(dfexcel.loc[index, 'cAnnee'],
-                                                             dfexcel.loc[index, 'cPeriode'])
+                                                             dfexcel.loc[index, 'cPeriod'])
                     print("periode=" + zPeriode)
                     for col_name in dfexcel.columns:
 
@@ -289,7 +289,7 @@ def terminerdataset(ds, pe, ou):
 # ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
 ListNomColonneInutileTab18 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
-ListNomColonneInutileTab15 = "cAnnee cCodeNiv cCodeStruct cPeriode	cTypeRapport"
+ListNomColonneInutileTab15 = "cAnnee cCodeNiv cCodeStruct cPeriod	cTypeRapport"
 
 # filedbname = 'Tab3TestErreur1.csv'
 filedbname = 'Produit_PEV_PALU_VF_CSV.csv'

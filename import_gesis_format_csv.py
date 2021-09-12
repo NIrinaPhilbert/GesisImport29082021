@@ -130,7 +130,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
         # if(639357+24 == 639381, 21014 à 10 09 2021 à 08h41):
         if (index > 0):
             if iNombreLigne != 5000:
-                codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
+                codegesisfs = int(dfexcel.loc[index, 'cCodeStruct'])
                 ou_uid = get_uid_ou_dhis2(codegesisfs)
                 if (tablename == 'tRM_CSB_Cons_Ext'):
                     vcode = dfexcel.loc[index, "cCode"]
@@ -289,7 +289,7 @@ def terminerdataset(ds, pe, ou):
 # ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
 ListNomColonneInutileTab18 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
-ListNomColonneInutileTab15 = "cAnnee cCodeNiv cCodeStru cPeriode	cTypeRapport"
+ListNomColonneInutileTab15 = "cAnnee cCodeNiv cCodeStruct cPeriode	cTypeRapport"
 
 # filedbname = 'Tab3TestErreur1.csv'
 filedbname = 'Produit_PEV_PALU_VF_CSV.csv'

@@ -162,8 +162,8 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
                             print("\n")
                             if (de_uid != "" and len(de_uid) == 11 and coc_uid != "" and len(coc_uid) == 11):
                                 submit(de_uid, coc_uid, dataSetID, ou_uid, zPeriode, str(value_colonne))
-                                #time.sleep(0.005)
-                                time.sleep(0.00125)
+                                #time.sleep(0.00125)
+                                time.sleep(0.000625)
 
                         else:
                             continue
@@ -171,8 +171,8 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
                     terminerdataset(dataSetID, zPeriode, ou_uid)
                     iNombreLigne += 1
                     print("iNombre ligne =" + str(iNombreLigne))
-                    # time.sleep(0.01)
-                    time.sleep(0.00125)
+                    # time.sleep(0.00125)
+                    time.sleep(0.000625)
 
                 else:
                     continue

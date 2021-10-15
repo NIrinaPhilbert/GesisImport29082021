@@ -289,10 +289,10 @@ def terminerdataset(ds, pe, ou):
 # ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
 ListNomColonneInutileTab18 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
-ListNomColonneInutileTab15 = "cAnnee cCodeNiv cCodeStruct cPeriod	cTypeRapport"
-
+ListNomColonneInutileTab15 = "cAnnee cCodeNiv cCodeStruct cPeriod cTypeRapport"
+ListNomColonneInutileTab14 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 # filedbname = 'Tab3TestErreur1.csv'
 filedbname = 'Tab14VisiteScolaire_CSV.csv'
 Tablename = 'tRM_CSB_Scolaire'
 # print(os.environ.get('w_param'))
-importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab15)
+importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab14)

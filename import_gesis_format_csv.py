@@ -130,7 +130,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
         # if(639357+24 == 639381, 21014 à 10 09 2021 à 08h41):
         if (index > 0):
             if iNombreLigne != 5000:
-                codegesisfs = int(dfexcel.loc[index, 'cCodeStruct'])
+                codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
                 ou_uid = get_uid_ou_dhis2(codegesisfs)
                 if (tablename == 'tRM_CSB_Cons_Ext'):
                     vcode = dfexcel.loc[index, "cCode"]

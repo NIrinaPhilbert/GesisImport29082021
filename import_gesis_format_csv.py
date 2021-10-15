@@ -140,7 +140,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
                     print("\n\n")
                     print("debut Iteration ligne")
                     zPeriode = get_periode_format_annee_mois(dfexcel.loc[index, 'cAnnee'],
-                                                             dfexcel.loc[index, 'cPeriod'])
+                                                             dfexcel.loc[index, 'cPeriode'])
                     print("periode=" + zPeriode)
                     for col_name in dfexcel.columns:
 

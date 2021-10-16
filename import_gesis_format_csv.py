@@ -293,7 +293,7 @@ ListNomColonneInutileTab15 = "cAnnee cCodeNiv cCodeStruct cPeriod cTypeRapport"
 ListNomColonneInutileTab14 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab12 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 # filedbname = 'Tab3TestErreur1.csv'
-filedbname = 'Tab12_CSV_PF_A_IMPORTER.csv'
+filedbname = 'TAB12_CSV_PF_A_IMPORTER.csv'
 Tablename = 'tRM_CSB_PF'
 # print(os.environ.get('w_param'))
 importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab12)

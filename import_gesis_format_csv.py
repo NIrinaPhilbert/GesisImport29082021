@@ -128,7 +128,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     for index, row in dfexcel.iterrows():
         # apres 520079e ligne
         # if(639357+24 == 639381, 21014 à 10 09 2021 à 08h41):
-        if (index > 0 and index < 20):
+        if (index > 0):
             if iNombreLigne != 5000:
                 codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
                 ou_uid = get_uid_ou_dhis2(codegesisfs)
@@ -292,8 +292,9 @@ ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cTy
 ListNomColonneInutileTab15 = "cAnnee cCodeNiv cCodeStruct cPeriod cTypeRapport"
 ListNomColonneInutileTab14 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab12 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
+ListNomColonneInutileTab10= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 # filedbname = 'Tab3TestErreur1.csv'
-filedbname = 'TAB12_CSB_PF_MANQUANT.csv'
-Tablename = 'tRM_CSB_PF'
+filedbname = 'tab_10_MATERNITE_CSV.csv'
+Tablename = 'tRM_CSB_Maternite'
 # print(os.environ.get('w_param'))
-importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab12)
+importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab10)

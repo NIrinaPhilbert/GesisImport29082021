@@ -7,7 +7,7 @@ import time
 import os
 from datetime import datetime
 
-uid_dataset = [{'tRM_CSB_Cons_Ext': 'GSUZkSLVfZy'}, {'tRM_CSB_CEXT_Utilisation_Prescription': 'GSUZkSLVfZy'},
+uid_dataset = [{'tRM_CSB_Cons_Ext': 'GSUZkSLVfZy'}, {'tRM_CSB_Violences_traumatismes':'GSUZkSLVfZy'}, {'tRM_CSB_CEXT_Utilisation_Prescription': 'GSUZkSLVfZy'},
                {'tRM_CSB_Depistage_PEC': 'ToV2hqPjApV'}, {'tRM_CSB_Depistage_PEC_ISTVIH': 'ToV2hqPjApV'},
                {'tRM_CSB_SURVEILLANCE_NUT': 'fVhjtnQnFpu'}, {'tRM_CSB_CONS_PRENAT': 'zVl3gPlL9HO'},
                {'tRM_CSB_Maternite': 'zVl3gPlL9HO'}, {'tRM_CSB_PEV_Enfants': 'zVl3gPlL9HO'},
@@ -128,7 +128,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     for index, row in dfexcel.iterrows():
         # apres 520079e ligne
         # if(639357+24 == 639381, 21014 à 10 09 2021 à 08h41):
-        if (index > 65600):
+        if (index > 0):
             if iNombreLigne != 5000:
                 codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
                 ou_uid = get_uid_ou_dhis2(codegesisfs)
@@ -295,8 +295,9 @@ ListNomColonneInutileTab12 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab10= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab9= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab11= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
+ListNomColonneInutileTab4 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
 # filedbname = 'Tab3TestErreur1.csv'
-filedbname = 'TAB11_CSV_PEV.csv'
-Tablename = 'tRM_CSB_PEV_Enfants'
+filedbname = 'TAB4_TRAUMA_CSV.csv'
+Tablename = 'tRM_CSB_Violences_traumatismes'
 # print(os.environ.get('w_param'))
-importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab11)
+importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab4)

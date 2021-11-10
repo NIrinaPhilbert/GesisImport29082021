@@ -128,7 +128,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     for index, row in dfexcel.iterrows():
         # apres 520079e ligne
         # if(639357+24 == 639381, 21014 à 10 09 2021 à 08h41):
-        if (index > 18741):
+        if (index > 19993):
             if iNombreLigne != 5000:
                 codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
                 ou_uid = get_uid_ou_dhis2(codegesisfs)

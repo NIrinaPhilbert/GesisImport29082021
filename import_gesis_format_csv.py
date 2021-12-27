@@ -30,7 +30,7 @@ def browse_json_array(label, mylist):
 def get_uid_ou_dhis2(vcodegesis):
     uiddhis2 = ""
 
-    csv_file = open('metadatagesis/fsnavftab3_9_csv.csv', 'r')
+    csv_file = open('metadatagesis/fsnavftab3_4_9_csv.csv', 'r')
     csv_reader = csv.DictReader(csv_file)
     for line in csv_reader:
         codegesis = line['CODE_GESIS']
@@ -128,7 +128,7 @@ def importer_gesis_vers_dhis2(tablename, filedbname, ListNomColonneInutile):
     for index, row in dfexcel.iterrows():
         # apres 520079e ligne
         # if(639357+24 == 639381, 21014 à 10 09 2021 à 08h41):
-        if (index > 1160):
+        if (index > 0):
             if iNombreLigne != 5000:
                 codegesisfs = int(dfexcel.loc[index, 'cCodeStru'])
                 ou_uid = get_uid_ou_dhis2(codegesisfs)
@@ -303,7 +303,7 @@ ListNomColonneInutileTab18= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab8= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab13= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 # filedbname = 'Tab3TestErreur1.csv'
-filedbname = 'TAB9_NA_CSV.csv'
-Tablename = 'tRM_CSB_CONS_PRENAT'
+filedbname = 'TAB4_NA_CSV.csv'
+Tablename = 'tRM_CSB_Violences_traumatismes'
 # print(os.environ.get('w_param'))
-importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab9)
+importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab4)

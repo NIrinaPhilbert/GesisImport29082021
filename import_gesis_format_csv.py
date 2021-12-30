@@ -30,7 +30,7 @@ def browse_json_array(label, mylist):
 def get_uid_ou_dhis2(vcodegesis):
     uiddhis2 = ""
 
-    csv_file = open('metadatagesis/fsnavftab3_4_9_csv.csv', 'r')
+    csv_file = open('metadatagesis/fsnavftab3_4_8_9_csv.csv', 'r')
     csv_reader = csv.DictReader(csv_file)
     for line in csv_reader:
         codegesis = line['CODE_GESIS']
@@ -303,7 +303,7 @@ ListNomColonneInutileTab18= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab8= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab13= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 # filedbname = 'Tab3TestErreur1.csv'
-filedbname = 'TAB7_NA_CSV.csv'
-Tablename = 'tRM_CSB_Depistage_PEC_ISTVIH'
+filedbname = 'TAB8_NA_CSV.csv'
+Tablename = 'tRM_CSB_SURVEILLANCE_NUT'
 # print(os.environ.get('w_param'))
-importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab7)
+importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab8)

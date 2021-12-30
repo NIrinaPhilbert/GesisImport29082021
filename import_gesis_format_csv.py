@@ -30,7 +30,7 @@ def browse_json_array(label, mylist):
 def get_uid_ou_dhis2(vcodegesis):
     uiddhis2 = ""
 
-    csv_file = open('metadatagesis/fsnavftab_3_4_8_9_csv.csv', 'r')
+    csv_file = open('metadatagesis/fsnavftab_3_4_8_9.csv', 'r')
     csv_reader = csv.DictReader(csv_file)
     for line in csv_reader:
         codegesis = line['CODE_GESIS']

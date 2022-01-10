@@ -14,7 +14,7 @@ uid_dataset = [{'tRM_CSB_Cons_Ext': 'GSUZkSLVfZy'}, {'tRM_CSB_Violences_traumati
                {'tRM_CSB_PF': 'zVl3gPlL9HO'}, {'tRM_CSB_DENTISTERI': 'kuBlaKJhV7W'},
                {'tRM_CSB_Scolaire': 'QDJ43MNqsGP'}, {'tRM_CSB_GES_STO_INTRANTS': 'NZ52X9Fw4lB'},
                {'tRM_CSB_INTRANT_IST_VIH_NUT_PF': 'NZ52X9Fw4lB'}, {'tRM_CSB_INTRANT_Tub_Lepre_MSR': 'NZ52X9Fw4lB'},
-               {'tRM_CSB_FANOME': 'NZ52X9Fw4lB'}, {'tRM_CSB_FANOME': 'fYvqcl44zlF'}, {'tRM_CSB_GESTFIN': 'fYvqcl44zlF'}]
+               {'tRM_CSB_FANOME': 'NZ52X9Fw4lB'}, {'tRM_CSB_GESTFIN': 'fYvqcl44zlF'}]
 
 
 def browse_json_array(label, mylist):
@@ -289,7 +289,7 @@ def terminerdataset(ds, pe, ou):
 # ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
 ListNomColonneInutileTab18 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab3 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport cType cCode c$_Tot_M c$_Tot_F c$_Tot_NC"
-ListNomColonneInutileTab15 = "cAnnee cCodeNiv cCodeStruct cPeriod cTypeRapport"
+ListNomColonneInutileTab15 = "cAnnee cCodeNiv cCodeStru cPeriod cTypeRapport"
 ListNomColonneInutileTab14 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab12 = "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab10= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
@@ -303,7 +303,7 @@ ListNomColonneInutileTab18= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab8= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 ListNomColonneInutileTab13= "cAnnee cCodeNiv cCodeStru cPeriode cTypeRapport"
 # filedbname = 'Tab3TestErreur1.csv'
-filedbname = 'TAB15_TUB_LEPRE_NA.csv'
-Tablename = 'tRM_CSB_INTRANT_Tub_Lepre_MSR'
+filedbname = 'TAB16_NA_FANOME_CSV.csv'
+Tablename = 'tRM_CSB_FANOME'
 # print(os.environ.get('w_param'))
 importer_gesis_vers_dhis2(Tablename, filedbname, ListNomColonneInutileTab15)
